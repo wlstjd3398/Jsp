@@ -6,7 +6,7 @@
 <title>forwardPage</title>
 </head>
 <body>
-	<h3></h3>
+	<h3>포워드 페이지</h3>
 	<%
 		pageContext.forward("../3_1_REQUEST.jsp");
 	%>

@@ -19,7 +19,7 @@
 	<p>
 		이름 : <%= name %><br/>
 		성별 : 
-		<%=gender.equals("1") ? "남자": "여자" %><br/>
+		<%=gender.equals("1") ? "남자": "여자" %><br/>  
 		취미 : 
 		<% 
 		for(String hobby : hobbies){
@@ -30,6 +30,6 @@
 		주소 : <%= addr %><br/>
 	</p>
 	
-	
+
 </body>
 </html>
