@@ -13,6 +13,7 @@ Session 내장객체
 -일정시간동안 일어나는 전체시간(start~end)
 -클라이언트에서 서버로 요청할때 서버에 기록되는 클라이언트 정보(Session Table)
 -서버는 각 클라이언트에 대한 고유번호(세션 아이디)를 부여
+-창 닫으면 없어짐
 
 session.setMaxInactiveInterval(60*3); 3분동안 유지
 
