@@ -7,10 +7,6 @@
 request.setCharacterEncoding("utf-8");
 
 String uid =request.getParameter("uid");
-String name =request.getParameter("name");
-String hp =request.getParameter("hp");
-String pos =request.getParameter("pos");
-String dep =request.getParameter("dep");
 
 // java/Ch12/lib/java.jar -> jsp/Ch05/lib으로 복사
 
@@ -32,7 +28,7 @@ Connection conn= DriverManager.getConnection(host, user, pass);
 Statement stmt = conn.createStatement();
 
 //4단계 - SQL 실행
-String sql = "INSERT INTO `MEMBER` VALUES ('"+uid+"', '"+name+"', '"+hp+"', '"+pos+"', '"+dep+"', NOW());";
+String sql = "DELETE FROM `MEMBER` WHERE `uid`='"+uid+"';";
 stmt.executeUpdate(sql);
 
 //5단계 - SQL 결과셋 처리(SELECT 일 경우)
@@ -44,5 +40,5 @@ conn.close();
 }
 
 // 리다이렉트
-response.sendRedirect("../5_1_Insert.jsp");
+response.sendRedirect("./5_2_Select.jsp");
 %>

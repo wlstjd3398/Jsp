@@ -26,13 +26,19 @@ try{
 Class.forName("com.mysql.jdbc.Driver");
 
 //2단계 - 데이터베이스 접속
-Connection conn= DriverManager.getConnection(host, user, pass);
+Connection conn = DriverManager.getConnection(host, user, pass);
 
 //3단계 - SQL 실행객체 생성
 Statement stmt = conn.createStatement();
 
 //4단계 - SQL 실행
-String sql = "INSERT INTO `MEMBER` VALUES ('"+uid+"', '"+name+"', '"+hp+"', '"+pos+"', '"+dep+"', NOW());";
+String sql = "UPDATE `MEMBER` SET ";
+sql += "`name`='"+name+"',";
+sql += "`hp`='"+hp+"',";
+sql += "`pos`='"+pos+"',";
+sql += "`dep`='"+dep+"' ";
+sql += "WHERE `uid`='"+uid+"';";
+
 stmt.executeUpdate(sql);
 
 //5단계 - SQL 결과셋 처리(SELECT 일 경우)
