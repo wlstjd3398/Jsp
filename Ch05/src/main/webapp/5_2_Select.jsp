@@ -10,9 +10,9 @@
 <%
 
 //DB정보
-String host = "jdbc:mysql://54.180.160.240:3306/wlstjd3398";
+String host = "jdbc:mysql://54.180.99.142:3306/wlstjd3398";
 String user = "wlstjd3398";
-String pass = "1234";
+String pass = "limited";
 
 
 List<MemberBean> members = new ArrayList<>();
