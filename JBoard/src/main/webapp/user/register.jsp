@@ -9,7 +9,7 @@
 <body>
     <div id="wrapper">
         <section id="user" class="register">
-            <form action="#" method="POST">
+            <form action="/JBoard/proc/register.jsp" method="POST">
                 <table border="1">
                     <caption>사이트 이용정보 입력</caption>
                     <tr>
