@@ -1,3 +1,6 @@
+<%@page import="kr.co.jboard.db.Sql"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="kr.co.jboard.db.DBConfig"%>
 <%@page import="kr.co.jboard.bean.MemberBean"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -12,26 +15,19 @@
 	String uid = request.getParameter("uid");
 	String pass = request.getParameter("pass");
 	
-	// DB정보
-	String host = "jdbc:mysql://54.180.99.142:3306/wlstjd3398";
-	String user = "wlstjd3398";
-	String pw = "limited";
 	
 	MemberBean mb = null;
 	
 	try{
-	// 1단계
-	Class.forName("com.mysql.jdbc.Driver");
-	
-	// 2단계
-	Connection conn = DriverManager.getConnection(host, user, pw);
+	// 1,2단계
+	Connection conn = DBConfig.getInstance().getConnection();
 	
 	// 3단계
-	Statement stmt = conn.createStatement();
-	
+	PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_MEMBER);
+	psmt.setString(1, uid);
+	psmt.setString(2, pass);
 	// 4단계
-	String sql = "SELECT * FROM `JBOARD_MEMBER` WHERE `uid`='"+uid+"' AND `pass`=PASSWORD('"+pass+"');";
-	ResultSet rs = stmt.executeQuery(sql);
+	ResultSet rs = psmt.executeQuery();
 	
 	// 5단계
 	if(rs.next()) {
@@ -69,7 +65,7 @@
 		
 	}else{
 		// 회원아닐 경우
-		response.sendRedirect("/JBoard/user/login.jsp?success=0");
+		response.sendRedirect("/JBoard/user/login.jsp?success=100");
 		
 	}
 	

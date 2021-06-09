@@ -1,3 +1,5 @@
+<%@page import="kr.co.jboard.db.Sql"%>
+<%@page import="kr.co.jboard.db.DBConfig"%>
 <%@page import="kr.co.jboard.bean.TermsBean"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -5,23 +7,16 @@
 <%@page import="java.sql.Connection"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	// DB정보
-	String host = "jdbc:mysql://54.180.99.142:3306/wlstjd3398";
-	String user = "wlstjd3398";
-	String pass = "limited";
 
 	TermsBean tb = new TermsBean();
 
 	try{
-	// 1단계
-	Class.forName("com.mysql.jdbc.Driver");
-	// 2단계
-	Connection conn = DriverManager.getConnection(host, user, pass);
+	// 1,2단계
+	Connection conn = DBConfig.getInstance().getConnection();
 	// 3단계
 	Statement stmt = conn.createStatement();
 	// 4단계
-	String sql = "SELECT * FROM `JBOARD_TERMS`;";
-	ResultSet rs = stmt.executeQuery(sql);
+	ResultSet rs = stmt.executeQuery(Sql.SELECT_TERMS);
 	// 5단계
 	if(rs.next()){
 		tb.setTerms(rs.getString(1));
