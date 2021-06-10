@@ -1,10 +1,20 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("utf-8");
+	String success = request.getParameter("success");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>글쓰기</title>
     <link rel="stylesheet" href="/JBoard/css/style.css"/>
+    <script>
+    	var success = "<%= success %>"
+    	if(success== 100){
+    		alert('파일첨부는 10MB이하만 가능합니다')
+    	}
+    </script>
 </head>
 <body>
     <div id="wrapper">

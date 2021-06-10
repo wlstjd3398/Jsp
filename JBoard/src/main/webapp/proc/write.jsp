@@ -18,12 +18,16 @@
 	// Multipart 전송 데이터 수신
 	String path = request.getServletContext().getRealPath("/file");
 	int maxSize = 1024 * 1024 * 10; // 최대 파일 허용 용량 10MB
-	MultipartRequest mRequest = new MultipartRequest(request,
-													 path,
-													 maxSize,
-													 "UTF-8",
-													 new DefaultFileRenamePolicy());
+	MultipartRequest mRequest = null;
 	
+	try{
+	mRequest = new MultipartRequest(request, path, maxSize, "UTF-8", new DefaultFileRenamePolicy());
+	
+	}catch(Exception e){
+		e.printStackTrace();
+		response.sendRedirect("/JBoard/write.jsp?success=100");
+		return;
+	}
 	
 	String title   = mRequest.getParameter("title");
 	String content = mRequest.getParameter("content");
