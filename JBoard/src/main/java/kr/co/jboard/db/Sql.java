@@ -28,11 +28,21 @@ public class Sql {
 	
 	public static final String SELECT_MAX_SEQ = "SELECT MAX(`seq`) FROM `JBOARD_ARTICLE`";
 	public static final String SELECT_COUNT_ARTICLE = "SELECT COUNT(*) FROM `JBOARD_ARTICLE`";
+	
+	
+	public static final String SELECT_ARTICLE = "SELECT * FROM `JBOARD_ARTICLE` AS a "
+												+ "LEFT JOIN `JBOARD_FILE` AS b "
+												+ "ON a.seq = b.parent "
+												+ "WHERE a.`seq`=?";
+			
+	
 	public static final String SELECT_ARTICLES = "SELECT a.*, b.`nick` FROM `JBOARD_ARTICLE` AS a "
 												+ "JOIN `JBOARD_MEMBER` AS b "
 												+ "ON a.uid = b.uid "
 												+ "ORDER BY `seq` DESC "
 												+ "LIMIT ?, 10";
+	
+	public static final String SELECT_FILE = "SELECT * FROM `JBOARD_FILE` WHERE `seq`=?";
 	
 	public static final String INSERT_ARTICLE = "INSERT INTO `JBOARD_ARTICLE` SET "
 												+ "`title`=?,"
@@ -48,5 +58,7 @@ public class Sql {
 												+ "`newName`=?,"
 												+ "`rdate`=NOW()";
 	
-		
+	public static final String UPDATE_ARTICLE_HIT = "UPDATE `JBOARD_ARTICLE` SET `hit`=`hit`+1 WHERE `seq`=?";
+	
+	public static final String UPDATE_FILE_DOWNLOAD= "UPDATE `JBOARD_FILE` SET `download`=`download`+1 WHERE `seq`=?";	
 }

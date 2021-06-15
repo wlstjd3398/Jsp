@@ -16,6 +16,15 @@ public class ArticleBean {
 	
 	// 새 필드 추가
 	private String nick;
+	private FileBean fb;
+	
+	
+	public FileBean getFb() {
+		return fb;
+	}
+	public void setFb(FileBean fb) {
+		this.fb = fb;
+	}
 	
 	public String getNick() {
 		return nick;

@@ -64,7 +64,7 @@
                     <% for(ArticleBean article : articles){ %>
                     <tr>
                         <td><%= pageStartNum-- %></td>
-                        <td><a href="/JBoard/view.jsp"><%= article.getTitle() %></a>&nbsp;[<%= article.getComment() %>]</td>
+                        <td><a href="/JBoard/view.jsp?seq=<%= article.getSeq() %>"><%= article.getTitle() %></a>&nbsp;[<%= article.getComment() %>]</td>
                         <td><%= article.getNick() %></td>
                         <td><%= article.getRdate().substring(2, 16) %></td>
                         <td><%= article.getHit() %></td>
