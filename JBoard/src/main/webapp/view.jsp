@@ -64,9 +64,9 @@
                 </tr>
             </table>
             <div>
-                <a href="#" class="btnDelete">삭제</a>
-                <a href="/JBoard/modify.html" class="btnModify">수정</a>
-                <a href="/JBoard/list.html" class="btnList">목록</a>
+                <a href="/JBoard/list.jsp" class="btnDelete">삭제</a>
+                <a href="/JBoard/modify.jsp" class="btnModify">수정</a>
+                <a href="/JBoard/list.jsp" class="btnList">목록</a>
             </div>  
             
             <!-- 댓글리스트 -->
@@ -80,10 +80,12 @@
                         <span><%= comment.getRdate().substring(2, 16) %></span>
                     </span>
                     <textarea name="comment" readonly><%= comment.getContent() %></textarea>
+                    <% if(comment.getUid().equals(mb.getUid())){ %>
                     <div>
-                        <a href="#">삭제</a>
-                        <a href="#">수정</a>
+                        <a href="/JBoard/proc/commentDelete.jsp?seq=<%= comment.getSeq() %>&parent=<%= comment.getParent() %>">삭제</a>
+                    	<a href="/JBoard/proc/commentEdit.jsp">수정</a>
                     </div>
+                    <% } %>
                 </article>
                 <% } %>
                 

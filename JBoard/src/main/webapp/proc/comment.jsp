@@ -18,8 +18,11 @@
 	
 	ArticleDao dao = ArticleDao.getInstance();
 	
+	// 댓글 등록
 	dao.insertComment(ab);
 	
-	/// 리다이렉트
+	// 댓글 카운트 +1
+	dao.updateCommentCount(parent, +1);
+	// 리다이렉트
 	response.sendRedirect("/JBoard/view.jsp?seq="+parent);
 %>

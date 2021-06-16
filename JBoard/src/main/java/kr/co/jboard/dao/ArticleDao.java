@@ -271,6 +271,7 @@ public ArticleBean selectArticle(String seq) {
 	
 	public void updateArticle() {}
 	public void updateArticleHit(String seq) {
+
 		try{
 			// 1,2단계
 			Connection conn = DBConfig.getInstance().getConnection();
@@ -286,6 +287,31 @@ public ArticleBean selectArticle(String seq) {
 			e.printStackTrace();
 		}
 	}
+	public void updateCommentCount(String seq, int type) {
+		try{
+			PreparedStatement psmt = null;
+			
+			// 1,2단계
+			Connection conn = DBConfig.getInstance().getConnection();
+			
+			// 3단계
+			if(type==1) {
+				psmt = conn.prepareStatement(Sql.UPDATE_COMMENT_PLUS);
+			}else{
+				psmt = conn.prepareStatement(Sql.UPDATE_COMMENT_MINUS);
+			}
+			
+			psmt.setString(1, seq);
+			// 4단계
+			psmt.executeUpdate();
+			// 5단계			
+			// 6단계
+			conn.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
 	public void updateFileDownload(String seq) {
 		try{
 			// 1,2단계
@@ -303,5 +329,17 @@ public ArticleBean selectArticle(String seq) {
 		}
 	}
 	public void deleteArticle() {}
+	public void deleteComment(String seq) {
+		try {
+			Connection conn = DBConfig.getInstance().getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.DELETE_COMMENT);
+			psmt.setString(1, seq);
+			
+			psmt.executeUpdate();
+			conn.close();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 }
