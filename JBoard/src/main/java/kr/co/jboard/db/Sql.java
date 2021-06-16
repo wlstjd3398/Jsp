@@ -42,12 +42,25 @@ public class Sql {
 												+ "ORDER BY `seq` DESC "
 												+ "LIMIT ?, 10";
 	
+	public static final String SELECT_COMMENTS = "SELECT a.*, b.nick FROM `JBOARD_ARTICLE` AS a "
+												+ "JOIN `JBOARD_MEMBER` AS b "
+												+ "on a.uid = b.uid "
+												+ "WHERE `parent`=? "
+												+ "ORDER BY `seq` ASC";
+	
 	public static final String SELECT_FILE = "SELECT * FROM `JBOARD_FILE` WHERE `seq`=?";
 	
 	public static final String INSERT_ARTICLE = "INSERT INTO `JBOARD_ARTICLE` SET "
 												+ "`title`=?,"
 												+ "`content`=?,"
 												+ "`file`=?,"
+												+ "`uid`=?,"
+												+ "`regip`=?,"
+												+ "`rdate`=NOW()";
+	
+	public static final String INSERT_COMMENT = "INSERT INTO `JBOARD_ARTICLE` SET "
+												+ "`parent`=?,"
+												+ "`content`=?,"
 												+ "`uid`=?,"
 												+ "`regip`=?,"
 												+ "`rdate`=NOW()";
