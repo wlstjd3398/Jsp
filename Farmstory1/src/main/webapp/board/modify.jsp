@@ -1,25 +1,31 @@
+<%@page import="kr.co.farmstory1.bean.ArticleBean"%>
+<%@page import="kr.co.farmstory1.dao.ArticleDao"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
 <%
 	request.setCharacterEncoding("utf-8");
 	String group = request.getParameter("group");
 	String cate  = request.getParameter("cate");
+	String seq = request.getParameter("seq");
 	String path = "./_aside_"+group+".jsp";
+	
+	// 수정 글 가져오기
+	 	ArticleBean article = ArticleDao.getInstance().selectArticle(seq);
 %>
 <jsp:include page="<%= path %>"/>
 <section id="board" class="modify">
     <h3>글수정</h3>
     <article>
-        <form action="#">
+        <form action="/Farmstory1/board/proc/modify.jsp" method="post">
             <table>
                 <tr>
                     <td>제목</td>
-                    <td><input type="text" name="title" placeholder="제목을 입력하세요."/></td>
+                    <td><input type="text" name="title" value="<%= article.getTitle() %>" placeholder="제목을 입력하세요."/></td>
                 </tr>
                 <tr>
                     <td>내용</td>
                     <td>
-                        <textarea name="content"></textarea>                                
+                        <textarea name="content"><%= article.getContent() %></textarea>                                
                     </td>
                 </tr>
                 <tr>
