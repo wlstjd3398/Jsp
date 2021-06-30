@@ -2,15 +2,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf=8">
-<title>Greeting</title>
+	<meta charset="UTF-8">
+	<title>greeting</title>
 </head>
 <body>
-	<h1>greeting</h1>
-
+	<h1>Greeting</h1>
+	
 	<a href="/Ch08/hello.do">hello</a>
 	<a href="/Ch08/welcome.do">welcome</a>
 	<a href="/Ch08/greeting.do">greeting</a>
+	
 	
 </body>
 </html>
