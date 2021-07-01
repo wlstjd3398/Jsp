@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,18 +20,21 @@
 			<th>입사일</th>
 			<th>관리</th>
 		</tr>
+		
+	<c:forEach var="member" items="${requestScope.members}">
 		<tr>
-			<td>a101</td>
-			<td>홍길동</td>
-			<td>010-1234-1111</td>
-			<td>사원</td>
-			<td>101</td>
-			<td>21-06-30</td>
+			<td>${member.uid}</td>
+			<td>${member.name}</td>
+			<td>${member.hp}</td>
+			<td>${member.pos}</td>
+			<td>${member.dep}</td>
+			<td>${member.rdate}</td>
 			<td>
-				<a href="/Ch08/member/modify.do">수정</a>
+				<a href="/Ch08/member/modify.do?uid=${member.uid}">수정</a>
 				<a href="#">삭제</a>
 			</td>
-		</tr>	
+		</tr>
+	</c:forEach>	
 	</table>
 </body>
 </html>
