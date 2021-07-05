@@ -18,6 +18,7 @@ public class RegisterService implements CommonService {
 			
 		}else {
 			// POST
+			// 전송 파라미터 수신
 			String uid  = req.getParameter("uid");
 			String name = req.getParameter("name");
 			String hp   = req.getParameter("hp");

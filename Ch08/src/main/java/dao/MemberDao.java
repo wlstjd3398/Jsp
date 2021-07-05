@@ -19,18 +19,17 @@ public class MemberDao {
 	
 	private MemberDao() {}
 	
-	// DBì •ë³´
-	private final String HOST = "jdbc:mysql://54.180.160.240:8080/wlstjd3398";
-	private final String USER = "wlstjd3398";
+	private final String HOST = "jdbc:mysql://54.180.160.240:3306/chhak2021";
+	private final String USER = "chhak2021";
 	private final String PASS = "1234";
 	
 	public void insertMember(MemberVO vo) {
 		try {
-			// 1ë‹¨ê³„
+			// 1´Ü°è
 			Class.forName("com.mysql.jdbc.Driver");
-			// 2ë‹¨ê³„
+			// 2´Ü°è
 			Connection conn = DriverManager.getConnection(HOST, USER, PASS);
-			// 3ë‹¨ê³„
+			// 3´Ü°è
 			String sql = "INSERT INTO `MEMBER` VALUES (?,?,?,?,?,NOW())";
 			PreparedStatement psmt = conn.prepareStatement(sql);
 			psmt.setString(1, vo.getUid());
@@ -38,10 +37,10 @@ public class MemberDao {
 			psmt.setString(3, vo.getHp());
 			psmt.setString(4, vo.getPos());
 			psmt.setInt(5, vo.getDep());
-			// 4ë‹¨ê³„
+			// 4´Ü°è
 			psmt.executeUpdate();
-			// 5ë‹¨ê³„			
-			// 6ë‹¨ê³„
+			// 5´Ü°è			
+			// 6´Ü°è
 			conn.close();
 			
 		}catch (Exception e) {
@@ -54,18 +53,18 @@ public class MemberDao {
 		MemberVO vo = new MemberVO();
 		
 		try {
-			// 1ë‹¨ê³„
+			// 1´Ü°è
 			Class.forName("com.mysql.jdbc.Driver");
-			// 2ë‹¨ê³„
+			// 2´Ü°è
 			Connection conn = DriverManager.getConnection(HOST, USER, PASS);
-			// 3ë‹¨ê³„
+			// 3´Ü°è
 			String sql = "SELECT * FROM `MEMBER` WHERE `uid`=?";
 			PreparedStatement psmt = conn.prepareStatement(sql);
 			psmt.setString(1, uid);
 			
-			// 4ë‹¨ê³„
+			// 4´Ü°è
 			ResultSet rs = psmt.executeQuery();
-			// 5ë‹¨ê³„
+			// 5´Ü°è
 			if(rs.next()) {
 				vo.setUid(rs.getString(1));
 				vo.setName(rs.getString(2));
@@ -75,7 +74,7 @@ public class MemberDao {
 				vo.setRdate(rs.getString(6));
 			}
 			
-			// 6ë‹¨ê³„
+			// 6´Ü°è
 			conn.close();
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -83,94 +82,104 @@ public class MemberDao {
 		
 		return vo;
 	}
-
+	
 	public List<MemberVO> selectMembers() {
-		
+
 		List<MemberVO> members = new ArrayList<>();
 		
 		try {
-		// 1ë‹¨ê³„
-		Class.forName("com.mysql.jdbc.Driver");
-		// 2ë‹¨ê³„
-		Connection conn = DriverManager.getConnection(HOST, USER, PASS);
-		// 3ë‹¨ê³„
-		String sql= "SELECT * FROM `MEMBER`";
-		PreparedStatement psmt = conn.prepareStatement(sql);
-		// 4ë‹¨ê³„
-		ResultSet rs = psmt.executeQuery();
-		// 5ë‹¨ê³„
-		while(rs.next()) {
-			MemberVO vo = new MemberVO();
-			vo.setUid(rs.getString(1));
-			vo.setName(rs.getString(2));
-			vo.setHp(rs.getString(3));
-			vo.setPos(rs.getString(4));
-			vo.setDep(rs.getInt(5));
-			vo.setRdate(rs.getString(6));
+			// 1´Ü°è
+			Class.forName("com.mysql.jdbc.Driver");
+			// 2´Ü°è
+			Connection conn = DriverManager.getConnection(HOST, USER, PASS);
+			// 3´Ü°è
+			String sql = "SELECT * FROM `MEMBER`";
+			PreparedStatement psmt = conn.prepareStatement(sql);
+			// 4´Ü°è
+			ResultSet rs = psmt.executeQuery();
+			// 5´Ü°è
+			while(rs.next()) {
+				MemberVO vo = new MemberVO();
+				vo.setUid(rs.getString(1));
+				vo.setName(rs.getString(2));
+				vo.setHp(rs.getString(3));
+				vo.setPos(rs.getString(4));
+				vo.setDep(rs.getInt(5));
+				vo.setRdate(rs.getString(6));
+				
+				members.add(vo);
+			}
 			
-			members.add(vo);
-		}
-		
-		// 6ë‹¨ê³„
-		conn.close();
-		}catch(Exception e) {
+			// 6´Ü°è
+			conn.close();
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		return members;
-		
 	}
 	
 	public void updateMember(MemberVO vo) {
-						
-			try {
-				// 1ë‹¨ê³„
-				Class.forName("com.mysql.jdbc.Driver");
-				// 2ë‹¨ê³„
-				Connection conn = DriverManager.getConnection(HOST, USER, PASS);
-				// 3ë‹¨ê³„
-				String sql = "UPDATE `MEMBER` SET `name`=? `hp`=?, `pos`=? `dep`=? ";
-						sql += "WHERE `uid`=?";
-				PreparedStatement psmt = conn.prepareStatement(sql);
-				psmt.setString(1, vo.getName());
-				psmt.setString(2, vo.getHp());
-				psmt.setString(3, vo.getPos());
-				psmt.setInt(4, vo.getDep());
-				psmt.setString(5, vo.getUid());
-				
-				// 4ë‹¨ê³„
-				psmt.executeUpdate();
-				// 5ë‹¨ê³„
-				// 6ë‹¨ê³„
-				conn.close();
-			}catch (Exception e) {
-				e.printStackTrace();
-			}
-	}
-	
-	public void deleteMember(String uid) {
-		
 		try {
-			// 1ë‹¨ê³„
+			// 1´Ü°è
 			Class.forName("com.mysql.jdbc.Driver");
-			// 2ë‹¨ê³„
+			// 2´Ü°è
 			Connection conn = DriverManager.getConnection(HOST, USER, PASS);
-			// 3ë‹¨ê³„
-			String sql = "DELETE FROM `MEMBER` WHERE `uid`=?";
+			// 3´Ü°è
+			String sql  = "UPDATE `MEMBER` SET `name`=?, `hp`=?, `pos`=?, `dep`=? ";
+			       sql += "WHERE `uid`=?";
+			       
 			PreparedStatement psmt = conn.prepareStatement(sql);
-			psmt.setString(1, uid);
-
+			psmt.setString(1, vo.getName());
+			psmt.setString(2, vo.getHp());
+			psmt.setString(3, vo.getPos());
+			psmt.setInt(4, vo.getDep());
+			psmt.setString(5, vo.getUid());
 			
-			// 4ë‹¨ê³„
+			// 4´Ü°è
 			psmt.executeUpdate();
-			// 5ë‹¨ê³„
-			// 6ë‹¨ê³„
+			// 5´Ü°è
+			// 6´Ü°è
 			conn.close();
 			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
+	}
+	
+	public void deleteMember(String uid) {
+		try {
+			// 1´Ü°è
+			Class.forName("com.mysql.jdbc.Driver");
+			// 2´Ü°è
+			Connection conn = DriverManager.getConnection(HOST, USER, PASS);
+			// 3´Ü°è
+			String sql = "DELETE FROM `MEMBER` WHERE `uid`=?";
+			PreparedStatement psmt = conn.prepareStatement(sql);
+			psmt.setString(1, uid);
+			
+			// 4´Ü°è
+			psmt.executeUpdate();
+			// 5´Ü°è
+			// 6´Ü°è
+			conn.close();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

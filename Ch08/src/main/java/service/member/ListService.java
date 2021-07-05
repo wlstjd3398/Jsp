@@ -16,11 +16,24 @@ public class ListService implements CommonService {
 		
 		List<MemberVO> members = MemberDao.getInstance().selectMembers();
 		
-		// View에서 출력하기 위해 request 객체로 저장
+		// View에서 참조해서 출력하기 위해 request 객체로 저장
 		req.setAttribute("members", members);
-
+		
 		return "/member/list.jsp";
 	}
-	
-	
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

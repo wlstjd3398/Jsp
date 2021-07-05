@@ -11,8 +11,9 @@ public class ModifyService implements CommonService {
 
 	@Override
 	public String requestProc(HttpServletRequest req, HttpServletResponse resp) {
+		
 		if(req.getMethod().equals("GET")) {
-			// Get 요청(수정할거니 데이터주세요)
+			// Get 요청
 			String uid = req.getParameter("uid");
 			
 			MemberVO vo = MemberDao.getInstance().selectMember(uid);
@@ -21,12 +22,12 @@ public class ModifyService implements CommonService {
 			
 			return "/member/modify.jsp";
 		}else {
-			// Post 요청(수정합니다)
-			String uid = req.getParameter("uid");
+			// Post 요청
+			String uid  = req.getParameter("uid");
 			String name = req.getParameter("name");
-			String hp = req.getParameter("hp");
-			String pos = req.getParameter("pos");
-			String dep = req.getParameter("dep");
+			String hp   = req.getParameter("hp");
+			String pos  = req.getParameter("pos");
+			String dep  = req.getParameter("dep");
 			
 			MemberVO vo = new MemberVO();
 			vo.setUid(uid);
@@ -37,9 +38,9 @@ public class ModifyService implements CommonService {
 			
 			MemberDao.getInstance().updateMember(vo);
 			
+			
 			return "redirect:/Ch08/member/list.do";
 		}
-		
 	}
 
 }

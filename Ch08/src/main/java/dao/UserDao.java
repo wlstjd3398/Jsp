@@ -2,7 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement; 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,27 +19,27 @@ public class UserDao {
 	
 	private UserDao() {}
 	
-	private final String HOST = "jdbc:mysql:///54.180.160.240:8080/wlstjd3398";
-	private final String USER = "wlstjd3398";
+	private final String HOST = "jdbc:mysql://54.180.160.240:3306/chhak2021";
+	private final String USER = "chhak2021";
 	private final String PASS = "1234";
 	
 	public void insertUser(UserVO vo) {
 		try {
-			// 1
+			// 1단계
 			Class.forName("com.mysql.jdbc.Driver");
-			// 2
+			// 2단계
 			Connection conn = DriverManager.getConnection(HOST, USER, PASS);
-			// 3
+			// 3단계
 			String sql = "INSERT INTO `USER1` VALUES (?,?,?,?)";
 			PreparedStatement psmt = conn.prepareStatement(sql);
 			psmt.setString(1, vo.getUid());
 			psmt.setString(2, vo.getName());
 			psmt.setString(3, vo.getHp());
 			psmt.setInt(4, vo.getAge());
-			// 4
+			// 4단계
 			psmt.executeUpdate();
-			// 5			
-			// 6
+			// 5단계			
+			// 6단계
 			conn.close();
 			
 		}catch (Exception e) {
@@ -52,18 +52,18 @@ public class UserDao {
 		UserVO vo = new UserVO();
 		
 		try {
-			// 1
+			// 1단계
 			Class.forName("com.mysql.jdbc.Driver");
-			// 2
+			// 2단계
 			Connection conn = DriverManager.getConnection(HOST, USER, PASS);
-			// 3
+			// 3단계
 			String sql = "SELECT * FROM `USER1` WHERE `uid`=?";
 			PreparedStatement psmt = conn.prepareStatement(sql);
 			psmt.setString(1, uid);
 			
-			// 4
+			// 4단계
 			ResultSet rs = psmt.executeQuery();
-			// 5
+			// 5단계
 			if(rs.next()) {
 				vo.setUid(rs.getString(1));
 				vo.setName(rs.getString(2));
@@ -71,7 +71,7 @@ public class UserDao {
 				vo.setAge(rs.getInt(4));
 			}
 			
-			// 6
+			// 6단계
 			conn.close();
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -85,16 +85,16 @@ public class UserDao {
 		List<UserVO> Users = new ArrayList<>();
 		
 		try {
-			// 1
+			// 1단계
 			Class.forName("com.mysql.jdbc.Driver");
-			// 2
+			// 2단계
 			Connection conn = DriverManager.getConnection(HOST, USER, PASS);
-			// 3
+			// 3단계
 			String sql = "SELECT * FROM `USER1`";
 			PreparedStatement psmt = conn.prepareStatement(sql);
-			// 4
+			// 4단계
 			ResultSet rs = psmt.executeQuery();
-			// 5
+			// 5단계
 			while(rs.next()) {
 				UserVO vo = new UserVO();
 				vo.setUid(rs.getString(1));
@@ -105,7 +105,7 @@ public class UserDao {
 				Users.add(vo);
 			}
 			
-			// 6
+			// 6단계
 			conn.close();
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -116,11 +116,11 @@ public class UserDao {
 	
 	public void updateUser(UserVO vo) {
 		try {
-			// 1
+			// 1단계
 			Class.forName("com.mysql.jdbc.Driver");
-			// 2
+			// 2단계
 			Connection conn = DriverManager.getConnection(HOST, USER, PASS);
-			// 3
+			// 3단계
 			String sql  = "UPDATE `USER1` SET `name`=?, `hp`=?, `age`=? ";
 			       sql += "WHERE `uid`=?";
 			       
@@ -130,10 +130,10 @@ public class UserDao {
 			psmt.setInt(3, vo.getAge());
 			psmt.setString(4, vo.getUid());
 			
-			// 4
+			// 4단계
 			psmt.executeUpdate();
-			// 5
-			// 6
+			// 5단계
+			// 6단계
 			conn.close();
 			
 		}catch (Exception e) {
@@ -143,19 +143,19 @@ public class UserDao {
 	
 	public void deleteUser(String uid) {
 		try {
-			// 1
+			// 1단계
 			Class.forName("com.mysql.jdbc.Driver");
-			// 2
+			// 2단계
 			Connection conn = DriverManager.getConnection(HOST, USER, PASS);
-			// 3
+			// 3단계
 			String sql = "DELETE FROM `USER1` WHERE `uid`=?";
 			PreparedStatement psmt = conn.prepareStatement(sql);
 			psmt.setString(1, uid);
 			
-			// 4
+			// 4단계
 			psmt.executeUpdate();
-			// 5
-			// 6
+			// 5단계
+			// 6단계
 			conn.close();
 			
 		}catch (Exception e) {
@@ -163,3 +163,17 @@ public class UserDao {
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

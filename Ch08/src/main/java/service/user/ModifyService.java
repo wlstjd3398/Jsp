@@ -13,7 +13,7 @@ public class ModifyService implements CommonService {
 	public String requestProc(HttpServletRequest req, HttpServletResponse resp) {
 		
 		if(req.getMethod().equals("GET")) {
-			// Get
+			// Get 요청
 			String uid = req.getParameter("uid");
 			
 			UserVO vo = UserDao.getInstance().selectUser(uid);
@@ -22,7 +22,7 @@ public class ModifyService implements CommonService {
 			
 			return "/user/modify.jsp";
 		}else {
-			// Post
+			// Post 요청
 			String uid  = req.getParameter("uid");
 			String name = req.getParameter("name");
 			String hp   = req.getParameter("hp");

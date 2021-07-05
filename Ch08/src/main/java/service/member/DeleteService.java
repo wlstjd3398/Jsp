@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.MemberDao;
 import service.CommonService;
 
-public class DeleteService implements CommonService{
+public class DeleteService implements CommonService {
 
 	@Override
 	public String requestProc(HttpServletRequest req, HttpServletResponse resp) {
@@ -17,4 +17,5 @@ public class DeleteService implements CommonService{
 		
 		return "redirect:/Ch08/member/list.do";
 	}
+
 }
