@@ -10,7 +10,7 @@
 <%@page import="kr.co.jboard.bean.MemberBean"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	// 세션 사용정보 가져오기
+// 세션 사용정보 가져오기
 	MemberBean mb = (MemberBean) session.getAttribute("sessMember");
 	
 	// 로그인을 하지 않고 List 페이지를 요청할 경우
@@ -50,7 +50,7 @@
             <h3>글목록</h3>
             <article>
                 <p>
-                    <%= mb.getNick() %>님 반갑습니다.
+                    <%=mb.getNick()%>님 반갑습니다.
                     <a href="/JBoard/user/proc/logout.jsp" class="logout">[로그아웃]</a>
                 </p>
                 <table border="0">
@@ -61,7 +61,9 @@
                         <th>날짜</th>
                         <th>조회</th>
                     </tr>
-                    <% for(ArticleBean article : articles){ %>
+                    <%
+                    for(ArticleBean article : articles){
+                    %>
                     <tr>
                         <td><%= pageStartNum-- %></td>
                         <td><a href="/JBoard/view.jsp?seq=<%= article.getSeq() %>"><%= article.getTitle() %></a>&nbsp;[<%= article.getComment() %>]</td>
