@@ -3,6 +3,7 @@ package kr.co.jboard2.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,53 +20,6 @@ public class ArticleDao {
 	
 	public static ArticleDao getInstance() {
 		return instance;
-	}
-	
-	public int[] getPageGroup(int currentPage, int lastPageNum) {
-		
-		int groupCurrent = (int) Math.ceil(currentPage / 10.0);
-		int groupStart = (groupCurrent - 1) * 10 + 1;
-		int groupEnd = groupCurrent * 10;
-		
-		if(groupEnd > lastPageNum) {
-			groupEnd = lastPageNum;
-		}
-		
-		int[] groups = {groupStart, groupEnd}; 
-		
-		return groups;		
-	}
-	
-	public int getPageStartNum(int total, int start) {
-		return total - start;
-	}
-	
-	public int getLimitStart(int currentPage) {
-		return (currentPage - 1) * 10;
-	}
-	
-	public int getCurrentPage(String pg) {
-		
-		int currentPage = 1;
-		
-		if(pg != null) {
-			currentPage = Integer.parseInt(pg);
-		}
-		
-		return currentPage;
-	}
-	
-	public int getLastPageNum(int total) {
-		
-		int lastPageNum = 0;
-		
-		if(total % 10 == 0){
-			lastPageNum = total / 10;
-		}else{
-			lastPageNum = total / 10 + 1;
-		}
-		
-		return lastPageNum;
 	}
 	
 	public int selectCountArticle() {
@@ -93,7 +47,27 @@ public class ArticleDao {
 		return total;
 	}
 	
-	public void insertArticle() {}
+	public int insertArticle(ArticleVo vo) {
+		
+		try{
+			Connection conn = DBConfig.getInstance().getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_ARTICLE);
+			psmt.setString(1, vo.getTitle());
+			psmt.setString(2, vo.getContent());
+			psmt.setInt(3, vo.getFile());
+			psmt.setString(4, vo.getUid());
+			psmt.setString(5, vo.getRegip());
+			
+			psmt.executeUpdate();
+			
+			conn.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return selectMaxSeq();
+	}
+	
 	public void insertComment(ArticleVo comment) {
 		try{
 			// 1,2 단계
@@ -114,6 +88,49 @@ public class ArticleDao {
 		}
 	}
 	
+	public void insertFile(int seq, String fname, String newName) {
+		try {
+			// 1, 2단계
+			Connection conn = DBConfig.getInstance().getConnection();
+			// 3단계
+			PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_FILE);
+			psmt.setInt(1, seq);
+			psmt.setString(2, fname);
+			psmt.setString(3, newName);
+			
+			// 4단계
+			psmt.executeUpdate();
+			// 5단계
+			// 6단계
+			conn.close();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public int selectMaxSeq() {
+		
+		int seq = 0;
+		
+		try {
+			Connection conn = DBConfig.getInstance().getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(Sql.SELECT_MAX_SEQ);
+			
+			if(rs.next()) {
+				seq = rs.getInt(1);
+			}
+			
+			conn.close();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return seq;
+	}
+
 	public ArticleVo selectArticle(String seq) {
 		
 		ArticleVo article = new ArticleVo();
