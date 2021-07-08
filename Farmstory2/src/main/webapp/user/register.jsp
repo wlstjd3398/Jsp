@@ -1,7 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="/Farmstory2/js/checkUid.js"></script>
+
 <section id="user" class="register">
-    <form action="#" method="POST">
+    <form action="/Farmstory2/user/register.do" method="POST">
         <table border="1">
             <caption>사이트 이용정보 입력</caption>
             <tr>
@@ -71,7 +75,7 @@
         </table>
 
         <div>
-            <a href="./login.html" class="btnCancel">취소</a>
+            <a href="/Farmstory2/user/login.do" class="btnCancel">취소</a>
             <input type="submit"   class="btnJoin" value="회원가입"/>
         </div>
 

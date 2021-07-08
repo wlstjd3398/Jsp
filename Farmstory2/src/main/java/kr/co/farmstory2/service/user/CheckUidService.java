@@ -3,20 +3,25 @@ package kr.co.farmstory2.service.user;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.JsonObject;
+
 import kr.co.farmstory2.dao.MemberDao;
 import kr.co.farmstory2.service.CommonService;
-import kr.co.farmstory2.vo.TermsVo;
 
-public class TermsService implements CommonService {
+public class CheckUidService implements CommonService{
 
 	@Override
 	public String requestProc(HttpServletRequest req, HttpServletResponse resp) {
 		
-		TermsVo tv = MemberDao.getInstance().selectTerms();
+		String uid = req.getParameter("uid");
 		
-		req.setAttribute("tv", tv);
+		int count = MemberDao.getInstance().selectMemberCount(uid);
 		
-		return "/user/terms.jsp";
+		// JSON 데이터 생성
+		JsonObject json = new JsonObject();
+		json.addProperty("result", count);
+		
+		return "json:"+json.toString();
 	}
 
 }
